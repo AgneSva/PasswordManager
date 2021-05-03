@@ -1,0 +1,5 @@
+d,d
+a,a
+b,b
+c,c
+agne,agne
