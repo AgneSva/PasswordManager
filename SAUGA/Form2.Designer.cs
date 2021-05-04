@@ -273,6 +273,7 @@ namespace SAUGA
             this.updatebtn.TabIndex = 21;
             this.updatebtn.Text = "update";
             this.updatebtn.UseVisualStyleBackColor = true;
+            this.updatebtn.Click += new System.EventHandler(this.updatebtn_Click);
             // 
             // showbtn
             // 
@@ -282,6 +283,7 @@ namespace SAUGA
             this.showbtn.TabIndex = 22;
             this.showbtn.Text = "show";
             this.showbtn.UseVisualStyleBackColor = true;
+            this.showbtn.Click += new System.EventHandler(this.showbtn_Click);
             // 
             // deletebtn
             // 

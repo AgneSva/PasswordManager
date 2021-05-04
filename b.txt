@@ -1,2 +1,0 @@
-b1,b,website.com,my website
-b2,bda1867a-1c76-43ba-bf06-0995fca49473,face.com,facebook
