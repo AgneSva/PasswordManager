@@ -176,7 +176,7 @@ namespace SAUGA
 
         private void showbtn_Click(object sender, EventArgs e)
         {
-            //selected password is decrypted
+            //selected password needs to be decrypted
            string selectedpass = listView1.SelectedItems[0].SubItems[1].Text;
   
            string decryptedPass= Decrypt(selectedpass);

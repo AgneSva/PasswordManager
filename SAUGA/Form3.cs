@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace SAUGA
         public string urlUpdate;
         public string commUpdate;
         public string username;
+        static byte[] bytes = ASCIIEncoding.ASCII.GetBytes("ZeroCool");
 
         public Form3(string user,string name, string oldpass,string url, string comm)
         {
@@ -34,6 +36,27 @@ namespace SAUGA
 
         }
 
+
+
+        public static string Encrypt(string originalString)
+        {
+            if (String.IsNullOrEmpty(originalString))
+            {
+                throw new ArgumentNullException
+                       ("The string which needs to be encrypted can not be null.");
+            }
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                cryptoProvider.CreateEncryptor(bytes, bytes), CryptoStreamMode.Write);
+            StreamWriter writer = new StreamWriter(cryptoStream);
+            writer.Write(originalString);
+            writer.Flush();
+            cryptoStream.FlushFinalBlock();
+            writer.Flush();
+            return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+        }
+
         private void cancelbtn_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -41,10 +64,13 @@ namespace SAUGA
 
         private void savebtn_Click(object sender, EventArgs e)
         {
-            //paimti nauja slaptazodi 
-            string newpass = newpasstxt.Text;
+
+            //encrypt newly updated password
+            string NewCryptedPass = Encrypt(newpasstxt.Text);
+            Console.WriteLine("\nEncrypt Result: {0}", NewCryptedPass);
+
             string oldline= nameUpdate + "," + passwordUpdate + "," + urlUpdate + "," + commUpdate;
-            string newline = nameUpdate + "," + newpass + "," + urlUpdate + "," + commUpdate;
+            string newline = nameUpdate + "," + NewCryptedPass + "," + urlUpdate + "," + commUpdate;
             Console.WriteLine(newline);
 
 
