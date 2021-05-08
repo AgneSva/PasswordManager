@@ -336,6 +336,7 @@ namespace SAUGA
             this.Controls.Add(this.exitbtn);
             this.Name = "form";
             this.Text = "form";
+            
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

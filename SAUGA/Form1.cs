@@ -55,43 +55,46 @@ namespace SAUGA
 
             //find the line with users name
 
+            
+            string[] str = File.ReadLines("C:\\Users\\inga3\\source\\repos\\SAUGA\\users.txt").ToArray(); ;
+            
+            string[] lineValues = new string[] { };
 
-            string[] lineValues = new string[2];
-
-
-            foreach (var line in File.ReadAllLines("C:\\Users\\inga3\\source\\repos\\SAUGA\\users.txt"))
+            foreach (var li in str)
             {
-
-                if (line.Contains(usertxt.Text))
+                if (li.Contains(usertxt.Text))
                 {
-                    lineValues = line.Split(',');
+                    lineValues = li.Split(',');
+                    Console.WriteLine(lineValues[1]);
+                    Console.WriteLine(lineValues[0]);
+                   
+                  
+
+
 
                 }
 
-            }
-            string name = lineValues[0];
-            string hashedpass = lineValues[1];
-
+            } 
             ScryptEncoder encoder = new ScryptEncoder();
-            bool areEquals = encoder.Compare(passtxt.Text, hashedpass);
+          
+            bool areEquals = encoder.Compare(passtxt.Text, lineValues[1]);
+                    Console.WriteLine(areEquals);
 
             if (areEquals == true)
             {
                 Console.WriteLine("user exists");
-               // go to users main page
-                    this.Hide();
+                //go to users main page
+                this.Hide();
                 form f2 = new form(usertxt.Text);
                 f2.Show();
-
             }
-            else
+            else if (areEquals == false)
             {
                 MessageBox.Show("this user doesnt exist");
+
             }
 
-
-
-
+          
 
         }
     }

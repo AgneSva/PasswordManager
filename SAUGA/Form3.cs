@@ -33,6 +33,7 @@ namespace SAUGA
             commUpdate = comm;
             passwordUpdate = oldpass;
             username = user;
+            newpasstxt.PasswordChar = '*';
 
         }
 
@@ -65,7 +66,7 @@ namespace SAUGA
         private void savebtn_Click(object sender, EventArgs e)
         {
 
-            //encrypt newly updated password
+            //encrypt newly updated password -DES 
             string NewCryptedPass = Encrypt(newpasstxt.Text);
             Console.WriteLine("\nEncrypt Result: {0}", NewCryptedPass);
 
